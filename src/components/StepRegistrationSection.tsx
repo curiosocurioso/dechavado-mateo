@@ -334,35 +334,38 @@ export const StepRegistrationSection: React.FC<StepRegistrationSectionProps> = (
           />
         </div>
 
-        {/* Primary Controls Row: Status & Chaos Turbulence */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+        {/* Primary Controls: Status & Chaos Turbulence */}
+        <div className="space-y-4 pt-1">
           
           {/* Status Selection */}
           <div>
             <label className="block text-xs font-semibold text-slate-700 dark:text-zinc-300 mb-1.5">
               Current Status
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {(
                 [
-                  { id: 'in_motion', label: '⚡ In Motion', desc: 'Active Focus' },
-                  { id: 'turbulent', label: '🌪️ Turbulent', desc: 'Raw Idea' },
-                  { id: 'polished', label: '✨ Polished', desc: 'Completed' },
-                  { id: 'parked', label: '🧊 Parked', desc: 'On Hold' },
+                  { id: 'in_motion', icon: '⚡', label: 'In Motion', desc: 'Active Focus' },
+                  { id: 'turbulent', icon: '🌪️', label: 'Turbulent', desc: 'Raw Idea' },
+                  { id: 'polished', icon: '✨', label: 'Polished', desc: 'Completed' },
+                  { id: 'parked', icon: '🧊', label: 'Parked', desc: 'On Hold' },
                 ] as const
               ).map((st) => (
                 <button
                   type="button"
                   key={st.id}
                   onClick={() => setStatus(st.id)}
-                  className={`text-xs px-2.5 py-2 rounded-lg border text-center font-medium transition-all ${
+                  className={`flex flex-col items-center justify-center p-2.5 rounded-xl border text-center transition-all cursor-pointer select-none min-w-0 ${
                     status === st.id
-                      ? 'bg-violet-50 dark:bg-violet-950/60 border-violet-400 dark:border-violet-600 text-violet-900 dark:text-violet-200 ring-1 ring-violet-400'
-                      : 'bg-slate-50 dark:bg-zinc-950/40 border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:border-slate-300 dark:hover:border-zinc-700'
+                      ? 'bg-violet-50 dark:bg-violet-950/70 border-violet-500 dark:border-violet-500 text-violet-950 dark:text-violet-100 ring-2 ring-violet-500/30 shadow-xs'
+                      : 'bg-slate-50 dark:bg-zinc-950/40 border-slate-200 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 hover:border-slate-300 dark:hover:border-zinc-700 hover:bg-slate-100 dark:hover:bg-zinc-900/60'
                   }`}
                 >
-                  <div className="font-semibold">{st.label}</div>
-                  <div className="text-[10px] text-slate-600 dark:text-zinc-400">{st.desc}</div>
+                  <span className="text-base leading-none mb-1">{st.icon}</span>
+                  <span className="text-xs font-bold leading-tight truncate w-full px-1">{st.label}</span>
+                  <span className="text-[10px] font-medium text-slate-500 dark:text-zinc-400 leading-tight mt-0.5 truncate w-full px-1">
+                    {st.desc}
+                  </span>
                 </button>
               ))}
             </div>
@@ -371,16 +374,16 @@ export const StepRegistrationSection: React.FC<StepRegistrationSectionProps> = (
           {/* Chaos / Turbulence Level Slider */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-semibold text-slate-700 dark:text-zinc-300 flex items-center gap-1.5">
+              <label htmlFor="step-chaos-slider" className="text-xs font-semibold text-slate-700 dark:text-zinc-300 flex items-center gap-1.5">
                 <Flame className={`w-3.5 h-3.5 ${chaosDetails.color}`} />
                 <span>Turbulence Level: {chaosLevel}/5</span>
               </label>
-              <span className={`text-[11px] font-semibold ${chaosDetails.color}`}>
+              <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 ${chaosDetails.color}`}>
                 {chaosDetails.label}
               </span>
             </div>
 
-            <div className="bg-slate-50 dark:bg-zinc-950/50 p-2.5 rounded-xl border border-slate-200 dark:border-zinc-800">
+            <div className="bg-slate-50 dark:bg-zinc-950/50 p-2.5 sm:p-3 rounded-xl border border-slate-200 dark:border-zinc-800">
               <input
                 id="step-chaos-slider"
                 type="range"
@@ -391,7 +394,7 @@ export const StepRegistrationSection: React.FC<StepRegistrationSectionProps> = (
                 onChange={(e) => setChaosLevel(parseInt(e.target.value, 10))}
                 className="w-full accent-violet-600 cursor-pointer h-1.5 bg-slate-200 dark:bg-zinc-700 rounded-lg appearance-none"
               />
-              <div className="flex justify-between text-[10px] text-slate-700 dark:text-zinc-300 font-medium mt-1">
+              <div className="flex justify-between text-[10px] text-slate-600 dark:text-zinc-400 font-medium mt-1.5 px-0.5">
                 <span>1 (Clear)</span>
                 <span>2 (Mild)</span>
                 <span>3 (Moderate)</span>
