@@ -1,0 +1,6 @@
+{
+  "name": "Chaotic Classifier",
+  "description": "Taming turbulent thoughts — register, organize, and visualize workflows for any project, app, song, or creative endeavor with an interactive timeline and drag-and-drop step sorting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
